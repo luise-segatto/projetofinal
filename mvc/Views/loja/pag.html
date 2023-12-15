@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Pagamento</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #303030
+        }
+
+        header {
+            background-color: #616161;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        #product-details {
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 2em;
+            max-width: 500px;
+            margin: 2em auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 0.8em;
+            margin-bottom: 1em;
+            box-sizing: border-box;
+        }
+
+        .payment-method {
+            display: none;
+            margin-bottom: 1em;
+        }
+
+        .payment-method.active {
+            display: block;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 0.5em;
+        }
+
+        .success-message {
+            color: #008000;
+            margin-top: 0.5em;
+        }
+
+        .submit-btn {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Página de Pagamento</h1>
+</header>
+
+<div class="container">
+    <div id="product-details">
+        <h2>Preencha os dados abaixo:</h2>
+
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Telefone:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label>Método de Pagamento:</label>
+        <select id="payment-method-selector">
+            <option value="pix">PIX</option>
+            <option value="credit-card">Cartão de Crédito</option>
+            <option value="boleto">Boleto</option>
+        </select>
+
+        <div id="pix-form" class="payment-method">
+            <label for="pix-key">Chave PIX:</label>
+            <input type="text" id="pix-key" name="pix-key" required>
+            <span id="pix-error" class="error-message"></span>
+        </div>
+
+        <div id="credit-card-form" class="payment-method">
+            <!-- Campos adicionais para detalhes do cartão de crédito -->
+            <label for="card-number">Número do Cartão:</label>
+            <input type="text" id="card-number" name="card-number" required>
+            <label for="expiry-date">Data de Validade:</label>
+            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" required>
+            <span id="credit-card-error" class="error-message"></span>
+        </div>
+
+        <div id="boleto-form" class="payment-method">
+            <!-- Campos adicionais para o boleto -->
+            <span id="boleto-success" class="success-message"></span>
+        </div>
+
+        <button class="submit-btn" onclick="submitPayment()">Pagar</button>
+    </div>
+</div>
+
+<script>
+    function submitPayment() {
+        resetErrors();
+
+        var selectedMethod = document.getElementById('payment-method-selector').value;
+
+        switch (selectedMethod) {
+            case 'pix':
+                var pixKey = document.getElementById('pix-key').value;
+                if (!pixKey) {
+                    displayError('pix-error', 'Por favor, insira a chave PIX.');
+                } else {
+                    // Lógica para processar pagamento PIX
+                    displaySuccess('pix-error', 'Pagamento PIX efetuado com sucesso!');
+                }
+                break;
+            case 'credit-card':
+                var cardNumber = document.getElementById('card-number').value;
+                var expiryDate = document.getElementById('expiry-date').value;
+                var cvv = document.getElementById('cvv').value;
+
+                if (!cardNumber || !expiryDate || !cvv) {
+                    displayError('credit-card-error', 'Por favor, preencha todos os campos do cartão de crédito.');
+                } else {
+                    // Lógica para processar pagamento com cartão de crédito
+                    displaySuccess('credit-card-error', 'Pagamento com cartão de crédito efetuado com sucesso!');
+                }
+                break;
+            case 'boleto':
+                // Lógica para gerar boleto e processar pagamento
+                displaySuccess('boleto-success', 'Boleto gerado com sucesso! Por favor, realize o pagamento.');
+                break;
+            default:
+                console.error('Método de pagamento não reconhecido');
+        }
+    }
+
+    function displayError(elementId, message) {
+        var errorElement = document.getElementById(elementId);
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
+
+    function displaySuccess(elementId, message) {
+        var successElement = document.getElementById(elementId);
+        successElement.textContent = message;
+        successElement.style.display = 'block';
+    }
+
+    function resetErrors() {
+        var errorElements = document.querySelectorAll('.error-message');
+        errorElements.forEach(function (element) {
+            element.textContent = '';
+            element.style.display = 'none';
+        });
+
+        var successElements = document.querySelectorAll('.success-message');
+        successElements.forEach(function (element) {
+            element.textContent = '';
+            element.style.display = 'none';
+        });
+    }
+
+    document.getElementById('payment-method-selector').addEventListener('change', function () {
+        resetErrors();
+
+        var selectedMethod = this.value;
+        var paymentMethods = document.querySelectorAll('.payment-method');
+
+        paymentMethods.forEach(function (method) {
+            method.classList.remove('active');
+        });
+
+        document.getElementById(selectedMethod + '-form').classList.add('active');
+    });
+</script>
+
+</body>
+</html>

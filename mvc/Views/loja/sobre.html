@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Josefin+Sans:wght@300&family=Merriweather:wght@400;900&family=Poppins:wght@300&family=Roboto+Mono&family=Signika+Negative:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/folha.css">
+</head>
+<body>
+  <style>
+    #cart {
+       border: 1px solid #ddd;
+       padding: 20px;
+       visibility: hidden;
+       opacity: 0;
+       position: absolute;
+       top: 50px;
+       right: 10px;
+       background-color: #5f5f5f;
+       z-index: 1000;
+     }
+     .product {
+       border: 1px solid #ddd;
+       padding: 15px;
+       text-align: center;
+       margin-bottom: 20px;
+       display: block;
+       max-height: 225px;
+       max-width: 205px;
+     }
+  
+     .add-to-cart {
+       background-color: #4caf50;
+       color: rgb(255, 255, 255);
+       padding: 10px;
+       border: none;
+       cursor: pointer;
+     }
+  
+     #cart-items {
+       list-style-type: none;
+       padding: 0;
+       max-height: 300px;
+       overflow-y: auto;
+     }
+  
+     #cart-items li {
+       margin-bottom: 10px;
+     }
+  
+     #total {
+       font-weight: bold;
+     }
+  
+     #cart-icon {
+       font-size: 24px;
+       margin-left: 10px;
+       cursor: pointer;
+     }
+  </style>
+    <header id="menu" class="">
+        <nav class="navbar navbar-expand-lg  d-flex justify-content-between ">
+          
+            <figure class=" col-md-1 m-3">
+              <img src="images/logo.png" alt="Imagem padrão" height="150px">
+            </figure>
+      
+            <div class="meni col-md-4 ">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav m-0 p-1 mb-lg-0  d-flex justify-content-around   ">
+                <li class="nav-item  m-0 p-1 w-auto">
+                  <a class="nav-link active " aria-current="page" href="home.html"><i class="bi bi-house"></i> Home</a>
+                </li>
+                <li class="nav-item  m-0 p-1 w-auto">
+                  <a class="nav-link  " aria-current="page" href="produtos.html"><i class="bi bi-bag-plus"></i> Produtos</a>
+                </li>
+                <li class="nav-item m-0 p-1 dropdown w-auto">
+                  <a class="nav-link dropdown-toggle  " href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                   <i class="bi bi-caret-down-fill"></i> Categorias
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="detalhesconjunto.html">Conjuntos</a></li>
+                    <li><a class="dropdown-item" href="detalheschapeu.html">Acessórios</a></li>
+                    
+                    <li><a class="dropdown-item" href="detalhesmochila.html">Mochila</a></li>
+                    <li><a class="dropdown-item" href="catalogoesp.html">Especiais de Natal</a></li>
+                  </ul>
+                </li>
+                
+              </ul>
+             
+            </div>
+          </div>
+      
+            <form class="d-flex justify-content-between align-items-center  col-md-5" role="search">
+              <input class="form-control m-1" type="search" placeholder="Buscar..." aria-label="Search">
+              <button class="btn btn-outline-success m-1" type="submit"><i class="bi bi-search"></i> </button>
+            </form>
+      
+            <div class="container d-flexi justify-content-between align-items-center  " style="max-height: 100%;">
+             
+              <a href="pagmoedas.html"> <img src="images/moeda.png"  alt="" class="h-50 "/></a>
+              <i " onclick="toggleCartVisibility()"  class="bi bi-cart-fill fs-4 "></i>
+              <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight"> Login</button>
+      
+            </div>
+      
+        </nav>
+        
+        <div id="cart" style="position: fixed;">
+          <h2>Carrinho de Compras</h2>
+          <ul id="cart-items"></ul>
+          <p id="total">Total: $0.00</p>
+          <a href="pag.html">
+            <button class="btn btn-outline-light"> Pagar</button></a>
+        </div>
+        <div class="offcanvas offcanvas-end align-items-center" tabindex="-1" id="offcanvasRight"
+          aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header">
+      
+      
+            <form method="get" action="" class="form">
+              <h2> Login</h2>
+              <br>
+              <label class="form-label">Email:
+                <input name="Sobrenome" type="text" id="Sobrenome" size="40" class="form-control" /></label><br />
+              <br>
+              <label class="form-label">Senha:
+                <input name="Sobrenome" type="text" id="Sobrenome" size="40" class="form-control" /></label><br />
+              <div>
+                <br>
+                <p class="link">
+                  Ainda não tem conta?
+                  <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight2">
+                    Cadastre-se</a>
+                  <br>
+                <p class="link">
+                  Esqueceu a senha?
+                  <a href="esqueciSenha.html">Clique aqui</a>
+      
+                  <br>
+                </p><a href="home.html"><button type="button" class="btn btn-primary" id="Buttonn">ENTRAR</button></a>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+            </form>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            ...
+          </div>
+        </div>
+        <div class="offcanvas offcanvas-end align-items-center" tabindex="-1" id="offcanvasRight2"
+          aria-labelledby="offcanvasRight2Label">
+          <div class="offcanvas-header">
+            <form method="get" action="." class="form">
+      
+              <h2> Cadastre-se no site</h2>
+              <label class="form-label">Nome:
+                <input name="Nome" type="text" id="Nome" value="" size="40" maxlength="9" onblur="pesquisacep(this.value);"
+                  class="form-control" /></label><br />
+              <label class="form-label">Sobrenome:
+                <input name="Sobrenome" type="text" id="Sobrenome" size="40" class="form-control" /></label><br />
+              <label class="form-label">CPF:
+                <input name="Cpf" type="text" id="Cep" size="40" class="form-control" /></label><br />
+              <label class="form-label">Telefone:
+                <input name="Telefone" type="text" id="Telefone" size="40" class="form-control" /></label><br />
+              <label class="form-label">Email:
+                <input name="Email" type="text" id="Email" size="40" class="form-control" /></label><br />
+              <label class="form-label">Endereço:
+                <input name="ibge" type="text" id="ibge" size="40" class="form-control" /></label><br />
+      
+      
+              <p class="link">
+                <a href="home.html">
+                  Cadastrar</a>
+      
+              <p class="link">
+                <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight3" aria-controls="offcanvasRight3">
+                  Adicionar endereço</a>
+                <br>
+                <a href="home.html"><button type="button" class="btn btn-primary" id="Buttonn">ENVIAR</button></a>
+      
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="offcanvas offcanvas-end align-items-center" tabindex="-1" id="offcanvasRight3"
+          aria-labelledby="offcanvasRight3Label">
+          <div class="offcanvas-header">
+            <div class="DivCadastro">
+              <br>
+      
+              <h2>Formulário de Endereço</h2>
+              <label class="form-label">Cep:
+                <input name="cep" type="text" id="cep" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);"
+                  class="form-control" /></label><br />
+              <label class="form-label">Rua:
+                <input name="rua" type="text" id="rua" size="60" class="form-control" /></label><br />
+              <label class="form-label">Bairro:
+                <input name="bairro" type="text" id="bairro" size="40" class="form-control" /></label><br />
+              <label class="form-label">Cidade:
+                <input name="cidade" type="text" id="cidade" size="40" class="form-control" /></label><br />
+              <label class="form-label">Estado:
+                <input name="uf" type="text" id="uf" size="2" class="form-control" /></label><br />
+              <label class="form-label">IBGE:
+                <input name="ibge" type="text" id="ibge" size="8" class="form-control" /></label><br />
+              <br>
+              <a href=""> <button type="button" class="btn btn-primary">Enviar</button></a>
+              </section>
+              <!-- Adicionando Javascript -->
+              <script>
+      
+                function limpa_formulário_cep() {
+                  //Limpa valores do formulário de cep.
+                  document.getElementById('rua').value = ("");
+                  document.getElementById('bairro').value = ("");
+                  document.getElementById('cidade').value = ("");
+                  document.getElementById('uf').value = ("");
+                  document.getElementById('ibge').value = ("");
+                }
+      
+                function meu_callback(conteudo) {
+                  if (!("erro" in conteudo)) {
+                    //Atualiza os campos com os valores.
+                    document.getElementById('rua').value = (conteudo.logradouro);
+                    document.getElementById('bairro').value = (conteudo.bairro);
+                    document.getElementById('cidade').value = (conteudo.localidade);
+                    document.getElementById('uf').value = (conteudo.uf);
+                    document.getElementById('ibge').value = (conteudo.ibge);
+                  } //end if.
+                  else {
+                    //CEP não Encontrado.
+                    limpa_formulário_cep();
+                    alert("CEP não encontrado.");
+                  }
+                }
+      
+                function pesquisacep(valor) {
+      
+                  //Nova variável "cep" somente com dígitos.
+                  var cep = valor.replace(/\D/g, '');
+      
+                  //Verifica se campo cep possui valor informado.
+                  if (cep != "") {
+      
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+      
+                    //Valida o formato do CEP.
+                    if (validacep.test(cep)) {
+      
+                      //Preenche os campos com "..." enquanto consulta webservice.
+                      document.getElementById('rua').value = "...";
+                      document.getElementById('bairro').value = "...";
+                      document.getElementById('cidade').value = "...";
+                      document.getElementById('uf').value = "...";
+                      document.getElementById('ibge').value = "...";
+      
+                      //Cria um elemento javascript.
+                      var script = document.createElement('script');
+      
+                      //Sincroniza com o callback.
+                      script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+      
+                      //Insere script no documento e carrega o conteúdo.
+                      document.body.appendChild(script);
+      
+                    } //end if.
+                    else {
+                      //cep é inválido.
+                      limpa_formulário_cep();
+                      alert("Formato de CEP inválido.");
+                    }
+                  } //end if.
+                  else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                  }
+                };
+      
+              </script>
+      
+              </section>
+              </main>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              ...
+            </div>
+          </div>
+      
+        </div>
+      </header>
+
+<img src="images/sobre.png" id="imgsobre">
+  
+  <br>
+  <br>
+<h2> Integrantes </h2>
+
+
+ 
+  
+<div class="row">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="sobreTextP">Nós somos a equipe Dev`s Fly, diretamente de Regente Feijó-SP. Somos estudantes da escola
+            SESI 368 no 2° ano do ensino médio, e cursamos no SENAI o curso de Desenvolvimento de sistemas.
+            Estamos trabalhando em um projeto que consiste em criar uma STEAM - site para venda de skins do jogo que a
+            turma do SENAI da cidade de Presidente Prudente, no curso de desenvolvimento de sistemas, está produzindo. O
+            projeto se chama Flying High “Voando Alto”.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+  <div class="card m-4 " style="width: 18rem;" id="cardSobre">
+    <img src="images/agatha.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Agatha Castange</h5>
+      <h5 class="card-text">17 anos</h5>
+      <a href="https://www.instagram.com/agathacastange/"><i class="bi bi-instagram"> </i> </a>
+    </div>
+  </div>
+  <div class="card m-4" style="width: 18rem;">
+    <img src="images/ana.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Ana Clara dos Santos</h5>
+      <h5 class="card-text">17 anos</h5>
+      <a href="https://www.instagram.com/ae.santtos_/"><i class="bi bi-instagram"> </i> </a>
+    </div>
+  </div>
+  <div class="card m-4" style="width: 18rem;">
+    <img src="images/kauan.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Kauan Cordeiro Zocante</h5>
+      <h5 class="card-text">16 anos</h5>
+      <a href="https://www.instagram.com/kauann_cz/"><i class="bi bi-instagram"> </i> </a>
+    </div>
+  </div>
+  <div class="card m-4" style="width: 18rem;">
+    <img src="images/lu.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Luise de Castro </h5>
+      <h5 class="card-text">16 anos</h5>
+      <a href="https://www.instagram.com/luisesegatto/"><i class="bi bi-instagram"> </i> </a>
+    </div>
+  </div>
+  <br><br><br>
+  <div class="card m-4" style="width: 18rem;">
+    <img src="images/malu.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Maria Luisa Pazinato</h5>
+      <h5 class="card-text">17 anos</h5>
+      <a href="https://www.instagram.com/malupazinato/"><i class="bi bi-instagram"> </i> </a>
+    </div>
+  </div>
+  <div class="card m-4" style="width: 18rem;">
+    <img src="images/pedricas.jpeg" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Pedro Matricardi</h5>
+      <h5 class="card-text">16 anos</h5>
+      <a href="https://www.instagram.com/pedro_matricardi/"><i class="bi bi-instagram"> </i> </a>
+    </div>
+  </div>
+  <div class="card m-4" style="width: 18rem;">
+    <img src="images/thi.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Thieruly Aparecida </h5>
+      <h5 class="card-text">17 anos</h5>
+      <a href="https://www.instagram.com/thierulyy/"><i class="bi bi-instagram"> </i> </a>
+    </div>
+  </div>
+  <div class="card m-4" style="width: 18rem;">
+    <img src="images/vitor.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Vitor Franscisquini</h5>
+      <h5 class="card-text">18 anos</h5>
+      <a href="https://www.instagram.com/vitin__alves/"><i class="bi bi-instagram"> </i> </a>
+    </div>
+  </div>
+</div>  
+<br> <br>
+<button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal" id="sobreTextL">
+Saiba mais...
+</button>
+</section>
+  <!-- Button trigger modal -->
+
+  <!-- Modal -->
+
+  <div class="equipeSobre">
+    <section id="textoEquipe">
+    </section>
+  </div>
+</div>
+</main>
+
+<footer>
+
+    <div class="row" >
+  
+      <div class="col" >
+        <figure><img src="images/logo.png" height="120px"></figure>
+      </div>
+      <div class="col">
+        <p>©2022-2023 Todos os direitos reservados<br> DEV´S FLY</p>
+      </div>
+  
+      <div class=col>
+        <a href="sobre.html"> Sobre nós | Equipe</a>
+        <br>
+        <a href="privacidade.html">Política de privacidade</a>
+        <br>
+        <a href="termos.html"> Termos de uso</a>
+        <br>
+        <a href="contato.html"> Entre em contato conosco</a>
+        <br>
+      </div>
+  
+      <div class=col>
+        <p>REDES SOCIAIS</p>
+        <div><i class="bi bi-facebook">Facebook: Dev´s Fly</i></div>
+        <div><i class="bi bi-instagram">Instagram: @devsflyregente</i></div>
+        <div><i class="bi bi-envelope-at">Email: devsfly@gmail.com</i></div>
+        <div></div>
+        <div></div>
+      </div>
+  
+    </div>
+    <script>
+      let cartItems = [];
+         let total = 0;
+     
+         function addToCart(productName, productPrice) {
+           cartItems.push({ name: productName, price: productPrice });
+           total += productPrice;
+           updateCartUI();
+         }
+     
+         function updateCartUI() {
+           const cartItemsElement = document.getElementById('cart-items');
+           const totalElement = document.getElementById('total');
+           cartItemsElement.innerHTML = '';
+     
+           cartItems.forEach(item => {
+             const listItem = document.createElement('li');
+             listItem.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+             cartItemsElement.appendChild(listItem);
+           });
+     
+           totalElement.textContent = `Total: $${total.toFixed(2)}`;
+     
+           const cart = document.getElementById('cart');
+           cart.style.visibility = 'visible';
+           cart.style.opacity = '1';
+         }
+     
+         function toggleCartVisibility() {
+           const cart = document.getElementById('cart');
+           if (cart.style.visibility === 'visible') {
+             cart.style.visibility = 'hidden';
+             cart.style.opacity = '0';
+           } else {
+             cart.style.visibility = 'visible';
+             cart.style.opacity = '1';
+           }
+         }
+     </script>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+  </body>
+  
+  </html>

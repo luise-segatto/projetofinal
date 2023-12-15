@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes Chapéu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Roboto+Mono&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Josefin+Sans:wght@300&family=Merriweather:wght@400;900&family=Poppins:wght@300&family=Roboto+Mono&family=Signika+Negative:wght@600&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Josefin+Sans:wght@300&family=Merriweather:wght@400;900&family=Poppins:wght@300&family=Roboto+Mono&family=Signika+Negative:wght@600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/folha.css">
+
+</head>
+<body>
+  <style>
+    #cart {
+       border: 1px solid #ddd;
+       padding: 20px;
+       visibility: hidden;
+       opacity: 0;
+       position: absolute;
+       top: 50px;
+       right: 10px;
+       background-color: #5f5f5f;
+       z-index: 1000;
+     }
+     .product {
+       border: 1px solid #ddd;
+       padding: 15px;
+       text-align: center;
+       margin-bottom: 20px;
+       display: block;
+       max-height: 225px;
+       max-width: 205px;
+     }
+  
+     .add-to-cart {
+       background-color: #4caf50;
+       color: rgb(255, 255, 255);
+       padding: 10px;
+       border: none;
+       cursor: pointer;
+     }
+  
+     #cart-items {
+       list-style-type: none;
+       padding: 0;
+       max-height: 300px;
+       overflow-y: auto;
+     }
+  
+     #cart-items li {
+       margin-bottom: 10px;
+     }
+  
+     #total {
+       font-weight: bold;
+     }
+  
+     #cart-icon {
+       font-size: 24px;
+       margin-left: 10px;
+       cursor: pointer;
+     }
+  </style>
+  
+  <header id="menu" class="">
+    <nav class="navbar navbar-expand-lg  d-flex justify-content-between ">
+      
+        <figure class=" col-md-1">
+          <img src="images/logo.png" alt="Imagem padrão" height="150px">
+        </figure>
+  
+        <div class="meni col-md-4 ">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav m-0 p-1 mb-lg-0  d-flex justify-content-around   ">
+            <li class="nav-item  m-0 p-1 w-auto">
+              <a class="nav-link active " aria-current="page" href="home.html"><i class="bi bi-house"></i> Home</a>
+            </li>
+            <li class="nav-item  m-0 p-1 w-auto">
+              <a class="nav-link  " aria-current="page" href="produtos.html"><i class="bi bi-bag-plus"></i> Produtos</a>
+            </li>
+            <li class="nav-item m-0 p-1 dropdown w-auto">
+              <a class="nav-link dropdown-toggle  " href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               <i class="bi bi-caret-down-fill"></i> Categorias
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="detalhesconjunto.html">Conjuntos</a></li>
+                <li><a class="dropdown-item" href="detalheschapeu.html">Acessórios</a></li>
+                
+                <li><a class="dropdown-item" href="detalhesmochila.html">Mochila</a></li>
+                <li><a class="dropdown-item" href="catalogoesp.html">Especiais de Natal</a></li>
+              </ul>
+            </li>
+            
+          </ul>
+         
+        </div>
+      </div>
+  
+        <form class="d-flex justify-content-between align-items-center  col-md-5" role="search">
+          <input class="form-control m-1" type="search" placeholder="Buscar..." aria-label="Search">
+          <button class="btn btn-outline-success m-1" type="submit"><i class="bi bi-search"></i> </button>
+        </form>
+  
+        <div class="container d-flexi justify-content-between align-items-center  " style="max-height: 100%;">
+         
+          <a href="pagmoedas.html"> <img src="images/moeda.png"  alt="" class="h-50 "/></a>
+          <i " onclick="toggleCartVisibility()"  class="bi bi-cart-fill fs-4 "></i>          
+
+          <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+      aria-controls="offcanvasRight"> Login</button>
+  
+        </div>
+  
+    </nav>
+    <div id="cart" style="position: fixed;">
+      <h2>Carrinho de Compras</h2>
+      <ul id="cart-items"></ul>
+      <p id="total">Total: $0.00</p>
+      
+      <a href="pag.html">
+      <button class="btn btn-outline-light"> Pagar</button></a>
+  
+    <div class="offcanvas offcanvas-end align-items-center" tabindex="-1" id="offcanvasRight"
+      aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+  
+  
+        <form method="get" action="" class="form">
+          <h2> Login</h2>
+          <br>
+          <label class="form-label">Email:
+            <input name="Sobrenome" type="text" id="Sobrenome" size="40" class="form-control" /></label><br />
+          <br>
+          <label class="form-label">Senha:
+            <input name="Sobrenome" type="text" id="Sobrenome" size="40" class="form-control" /></label><br />
+          <div>
+            <br>
+            <p class="link">
+              Ainda não tem conta?
+              <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight2">
+                Cadastre-se</a>
+              <br>
+            <p class="link">
+              Esqueceu a senha?
+              <a href="esqueciSenha.html">Clique aqui</a>
+  
+              <br>
+            </p><a href="home.html"><button type="button" class="btn btn-primary" id="Buttonn">ENTRAR</button></a>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+        </form>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        ...
+      </div>
+    </div>
+    <div class="offcanvas offcanvas-end align-items-center" tabindex="-1" id="offcanvasRight2"
+      aria-labelledby="offcanvasRight2Label">
+      <div class="offcanvas-header">
+        <form method="get" action="." class="form">
+  
+          <h2> Cadastre-se no site</h2>
+          <label class="form-label">Nome:
+            <input name="Nome" type="text" id="Nome" value="" size="40" maxlength="9" onblur="pesquisacep(this.value);"
+              class="form-control" /></label><br />
+          <label class="form-label">Sobrenome:
+            <input name="Sobrenome" type="text" id="Sobrenome" size="40" class="form-control" /></label><br />
+          <label class="form-label">CPF:
+            <input name="Cpf" type="text" id="Cep" size="40" class="form-control" /></label><br />
+          <label class="form-label">Telefone:
+            <input name="Telefone" type="text" id="Telefone" size="40" class="form-control" /></label><br />
+          <label class="form-label">Email:
+            <input name="Email" type="text" id="Email" size="40" class="form-control" /></label><br />
+          <label class="form-label">Endereço:
+            <input name="ibge" type="text" id="ibge" size="40" class="form-control" /></label><br />
+  
+  
+          <p class="link">
+            <a href="home.html">
+              Cadastrar</a>
+  
+          <p class="link">
+            <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight3" aria-controls="offcanvasRight3">
+              Adicionar endereço</a>
+            <br>
+            <a href="home.html"><button type="button" class="btn btn-primary" id="Buttonn">ENVIAR</button></a>
+  
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="offcanvas offcanvas-end align-items-center" tabindex="-1" id="offcanvasRight3"
+      aria-labelledby="offcanvasRight3Label">
+      <div class="offcanvas-header">
+        <div class="DivCadastro">
+          <br>
+  
+          <h2>Formulário de Endereço</h2>
+          <label class="form-label">Cep:
+            <input name="cep" type="text" id="cep" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);"
+              class="form-control" /></label><br />
+          <label class="form-label">Rua:
+            <input name="rua" type="text" id="rua" size="60" class="form-control" /></label><br />
+          <label class="form-label">Bairro:
+            <input name="bairro" type="text" id="bairro" size="40" class="form-control" /></label><br />
+          <label class="form-label">Cidade:
+            <input name="cidade" type="text" id="cidade" size="40" class="form-control" /></label><br />
+          <label class="form-label">Estado:
+            <input name="uf" type="text" id="uf" size="2" class="form-control" /></label><br />
+          <label class="form-label">IBGE:
+            <input name="ibge" type="text" id="ibge" size="8" class="form-control" /></label><br />
+          <br>
+          <a href=""> <button type="button" class="btn btn-primary">Enviar</button></a>
+          </section>
+          <!-- Adicionando Javascript -->
+          <script>
+  
+            function limpa_formulário_cep() {
+              //Limpa valores do formulário de cep.
+              document.getElementById('rua').value = ("");
+              document.getElementById('bairro').value = ("");
+              document.getElementById('cidade').value = ("");
+              document.getElementById('uf').value = ("");
+              document.getElementById('ibge').value = ("");
+            }
+  
+            function meu_callback(conteudo) {
+              if (!("erro" in conteudo)) {
+                //Atualiza os campos com os valores.
+                document.getElementById('rua').value = (conteudo.logradouro);
+                document.getElementById('bairro').value = (conteudo.bairro);
+                document.getElementById('cidade').value = (conteudo.localidade);
+                document.getElementById('uf').value = (conteudo.uf);
+                document.getElementById('ibge').value = (conteudo.ibge);
+              } //end if.
+              else {
+                //CEP não Encontrado.
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+              }
+            }
+  
+            function pesquisacep(valor) {
+  
+              //Nova variável "cep" somente com dígitos.
+              var cep = valor.replace(/\D/g, '');
+  
+              //Verifica se campo cep possui valor informado.
+              if (cep != "") {
+  
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+  
+                //Valida o formato do CEP.
+                if (validacep.test(cep)) {
+  
+                  //Preenche os campos com "..." enquanto consulta webservice.
+                  document.getElementById('rua').value = "...";
+                  document.getElementById('bairro').value = "...";
+                  document.getElementById('cidade').value = "...";
+                  document.getElementById('uf').value = "...";
+                  document.getElementById('ibge').value = "...";
+  
+                  //Cria um elemento javascript.
+                  var script = document.createElement('script');
+  
+                  //Sincroniza com o callback.
+                  script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+  
+                  //Insere script no documento e carrega o conteúdo.
+                  document.body.appendChild(script);
+  
+                } //end if.
+                else {
+                  //cep é inválido.
+                  limpa_formulário_cep();
+                  alert("Formato de CEP inválido.");
+                }
+              } //end if.
+              else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+              }
+            };
+  
+          </script>
+  
+          </section>
+          </main>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          ...
+        </div>
+      </div>
+  
+    </div>
+  </header>
+
+<section>
+  <div class="containeraa">    <br>
+
+    <h1 class="Thilindaaaa">Chapéus</h1> <img src="images/MicrosoftTeams-image_-_2023-11-17T140647.024-removebg-preview.png">
+    <br> 
+    <div class="productaa">
+      <div class="product-imageaa">
+        <img src="images/chapeufem.png" alt="Nome da Skin">
+      </div>
+      <div class="product-detailsaa">
+        <div class="product-titleaa">Chapéu Primavera Florida</div>
+        <div class="product-descriptionaa">
+          <p>Apresentamos o Chapéu Primavera Florida, um acessório que combina a leveza da palha com a delicadeza de uma flor na frente. Este chapéu é mais do que uma proteção contra o sol; é uma declaração de estilo que transmite uma sensação de frescor, feminilidade e elegância descontraída.</p>
+          <p>$ 6.000</p>
+          <a href="/chapeufem"><button type="button" class="btn btn-success" style=" background-color: rgb(60, 224, 0);">PERSONALIZAR PRODUTO</button></a>
+         
+         <a class="add-to-cart btn btn-danger" onclick="addToCart('Chapéu Primavera Florida', 6000)" style=" background-color: rgb(255, 0, 0); font-size:100%; position: relative; margin-left: 0%; 
+          ">ADICIONAR AO CARRINHO</a>         </div>      </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+  <div class="containeraa"> <img src="images/MicrosoftTeams-image_-_2023-11-17T140647.024-removebg-preview.png">
+    <div class="productaa">
+      <div class="product-imageaa">
+        <img src="images/chapeucolor.png" alt="Nome da Skin">
+      </div>
+      <div class="product-detailsaa">
+        <div class="product-titleaa">Boné Arco-Íris Vibrante</div>
+        <div class="product-descriptionaa">
+          <p>Prepare-se para uma explosão de alegria com nosso Boné Arco-Íris Vibrante, um acessório que transforma o seu visual em uma celebração de cores. Este boné é mais do que um simples acessório para a cabeça; é uma declaração ousada de estilo, energia positiva e diversão sem limites. </p>
+          <p>$ 8.000</p>
+          <a href="/chapeucol"><button type="button" class="btn btn-success" style=" background-color: rgb(60, 224, 0);">PERSONALIZAR PRODUTO</button></a>
+             
+         <a class="add-to-cart btn btn-danger" onclick="addToCart('Boné Arco-Íris Vibrante', 8000)" style=" background-color: rgb(255, 0, 0); font-size:100%; position: relative; margin-left: 0%; 
+         ">ADICIONAR AO CARRINHO</a>         </div>      </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="containeraa">  <img src="images/MicrosoftTeams-image_-_2023-11-17T140647.024-removebg-preview.png">
+  <div class="productaa">
+    <div class="product-imageaa">
+      <img src="images/chapeuuu.png" alt="Nome da Skin">
+    </div>
+    <div class="product-detailsaa">
+      <div class="product-titleaa">Chapéu de Cowboy</div>
+      <div class="product-descriptionaa">
+        <p> O chapéu de cowboy é um icônico acessório de vestuário, associado à cultura do Velho Oeste. Com uma aba larga e uma coroa alta, esse chapéu é geralmente feito de feltro resistente, couro ou palha. Sua aba ampla proporciona sombra ao rosto, protegendo contra o sol escaldante do deserto. O chapéu muitas vezes apresenta uma faixa decorativa ao redor da coroa, frequentemente em tons de marrom, preto ou conhaque, adicionando um toque de estilo rústico. 
+
+        </p>
+        <p>$ 4.000</p>
+        <a href="/chapeucowboy"><button type="button" class="btn btn-success" style=" background-color: rgb(60, 224, 0);">PERSONALIZAR PRODUTO</button></a>
+             
+         <a class="add-to-cart btn btn-danger" onclick="addToCart('Chapéu de Cowboy', 4000)" style=" background-color: rgb(255, 0, 0); font-size:100%; position: relative; margin-left: 0%; 
+         ">ADICIONAR AO CARRINHO</a>         </div>      </div>  
+        </div>
+   
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+<div class="containeraa">  <img src="images/MicrosoftTeams-image_-_2023-11-17T140647.024-removebg-preview.png">
+  <div class="productaa">
+    <div class="product-imageaa">
+      <img src="images/bucket.png" alt="Nome da Skin">
+    </div>
+    <div class="product-detailsaa">
+      <div class="product-titleaa"> Bucket Smile & Shine</div>
+      <div class="product-descriptionaa">
+        <p> 
+          Ilumine seu dia com o nosso irresistível Bucket Amarelo "Smile & Shine", um acessório que vai além de ser apenas funcional, é uma declaração de estilo e positividade. Este bucket não é apenas uma peça prática, é um convite constante para sorrir e irradiar alegria por onde quer que você vá.
+        </p>
+        <p>$ 8.000</p>
+        <a href="/buket"><button type="button" class="btn btn-success" style=" background-color: rgb(60, 224, 0);">PERSONALIZAR PRODUTO</button></a>
+             
+         <a class="add-to-cart btn btn-danger" onclick="addToCart('Bucket Smile & Shine', 8000)" style=" background-color: rgb(255, 0, 0); font-size:100%; position: relative; margin-left: 0%; 
+         ">ADICIONAR AO CARRINHO</a>         </div>      </div>  
+        </div>      
+   
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+<div class="containeraa">  <img src="images/MicrosoftTeams-image_-_2023-11-17T140647.024-removebg-preview.png">
+  <div class="productaa">
+    <div class="product-imageaa">
+      <img src="images/coroaa.png" alt="Nome da Skin">
+    </div>
+    <div class="product-detailsaa">
+      <div class="product-titleaa">Coroa Majestosa Real</div>
+      <div class="product-descriptionaa">
+        <p> Seja a personificação da realeza com a nossa Coroa Majestosa de Elegância Real, um símbolo imponente de poder, sofisticação e estilo. Esta coroa excepcional é mais do que um acessório; é uma obra-prima que eleva qualquer ocasião especial a um patamar de grandeza inigualável.
+        </p>
+        <p>$ 9.000</p>
+        <a href="/coroafem"><button type="button" class="btn btn-success" style=" background-color: rgb(60, 224, 0);">PERSONALIZAR PRODUTO</button></a>
+             
+         <a class="add-to-cart btn btn-danger" onclick="addToCart('Coroa Majestosa Real', 9000)" style=" background-color: rgb(255, 0, 0); font-size:100%; position: relative; margin-left: 0%; 
+         ">ADICIONAR AO CARRINHO</a>         </div>      </div>  
+        </div> 
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+<div class="containeraa">  <img src="images/MicrosoftTeams-image_-_2023-11-17T140647.024-removebg-preview.png">
+  <div class="productaa">
+    <div class="product-imageaa">
+      <img src="images/forma.png" alt="Nome da Skin">
+    </div>
+    <div class="product-detailsaa">
+      <div class="product-titleaa">Chapéu de Formatura</div>
+      <div class="product-descriptionaa">
+        <p>Celebre a conquista do seu sucesso acadêmico com o Chapéu de Formatura  da nossa coleção exclusiva. Este exuberante acessório é mais do que apenas um símbolo de graduação; é uma manifestação de todo o esforço, dedicação e realizações que culminaram no momento inesquecível da formatura.
+        </p>
+        <p>$ 5.500</p>
+        <a href="/chapeuform"><button type="button" class="btn btn-success" style=" background-color: rgb(60, 224, 0);">PERSONALIZAR PRODUTO</button></a>
+             
+         <a class="add-to-cart btn btn-danger" onclick="addToCart('Chapéu de Formatura', 5500)" style=" background-color: rgb(255, 0, 0); font-size:100%; position: relative; margin-left: 0%; 
+         ">ADICIONAR AO CARRINHO</a>         </div>      </div>  
+        </div> 
+   
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+<div class="containeraa">  <img src="images/MicrosoftTeams-image_-_2023-11-17T140647.024-removebg-preview.png">
+  <div class="productaa">
+    <div class="product-imageaa">
+      <img src="images/lacoo.png" alt="Nome da Skin">
+    </div>
+    <div class="product-detailsaa">
+      <div class="product-titleaa">Laço Delicado Vermelho</div>
+      <div class="product-descriptionaa">
+        <p> Descubra a beleza atemporal com o nosso Laço Delicado, um acessório que transforma cada detalhe em uma expressão de elegância. Este gracioso laço não é apenas um adorno, mas uma declaração de estilo refinado que acentua sua feminilidade com um toque suave de sofisticação.
+
+        </p>
+        <p>$ 3.000</p>
+        <a href="/lacinho"><button type="button" class="btn btn-success" style=" background-color: rgb(60, 224, 0);">PERSONALIZAR PRODUTO</button></a>
+             
+         <a class="add-to-cart btn btn-danger" onclick="addToCart('Laço Delicado Vermelho', 3000)" style=" background-color: rgb(255, 0, 0); font-size:100%; position: relative; margin-left: 0%; 
+         ">ADICIONAR AO CARRINHO</a>         </div>      </div>  
+        </div> 
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+<div class="containeraa">  <img src="images/MicrosoftTeams-image_-_2023-11-17T140647.024-removebg-preview.png">
+  <div class="productaa">
+    <div class="product-imageaa">
+      <img src="images/coelhoo.png" alt="Nome da Skin">
+    </div>
+    <div class="product-detailsaa">
+      <div class="product-titleaa">Arquinho de Orelha de Coelho</div>
+      <div class="product-descriptionaa">
+        <p> Dê asas à sua imaginação e abrace a fofura com nosso Arquinho de Orelha de Coelho, o acessório perfeito para iluminar seus dias com um toque lúdico e encantador. Este arquinho não é apenas um adereço, é uma declaração de estilo leve e divertida que vai te transportar para um mundo de brincadeiras e alegria. 
+
+        </p>
+        <p>$ 6.500</p>
+        <a href="/orelhacoelho"><button type="button" class="btn btn-success" style=" background-color: rgb(60, 224, 0);">PERSONALIZAR PRODUTO</button></a>
+             
+         <a class="add-to-cart btn btn-danger" onclick="addToCart('Arquinho de Orelha de Coelho', 6500)" style=" background-color: rgb(255, 0, 0); font-size:100%; position: relative; margin-left: 0%; 
+         ">ADICIONAR AO CARRINHO</a>         </div>      </div>  
+        </div> 
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+<div class="containeraa">  <img src="images/MicrosoftTeams-image_-_2023-11-17T140647.024-removebg-preview.png">
+  <div class="productaa">
+    <div class="product-imageaa">
+      <img src="images/chapeubruxo.png" alt="Nome da Skin">
+    </div>
+    <div class="product-detailsaa">
+      <div class="product-titleaa">Chapéu de Bruxa Mística</div>
+      <div class="product-descriptionaa">
+        <p> Explore o lado encantado da moda com nosso Chapéu de Bruxa Mística, uma obra-prima que une estilo e magia em uma única peça. Este acessório exclusivo é muito mais do que um simples chapéu; é uma expressão de sua personalidade única e um convite para entrar no reino da moda sobrenatural. </p>
+        <p>$ 7.500</p>
+        <a href="/chapeubruxo"><button type="button" class="btn btn-success" style=" background-color: rgb(60, 224, 0);">PERSONALIZAR PRODUTO</button></a>
+             
+         <a class="add-to-cart btn btn-danger" onclick="addToCart('Chapéu de Bruxa Mística', 7500)" style=" background-color: rgb(255, 0, 0); font-size:100%; position: relative; margin-left: 0%; 
+         ">ADICIONAR AO CARRINHO</a>         </div>      </div>  
+        </div> 
+    </div>
+  </div>
+</div>
+<br><br>
+
+</section>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+  integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+  integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+<footer>
+
+  <div class="row">
+
+    <div class="col" id="imagemlogofoot">
+      <figure><img src="images/logo.png" height="120px"></figure>
+    </div>
+    <div class="col">
+      <p>©2022-2023 Todos os direitos reservados<br> DEV´S FLY</p>
+    </div>
+
+    <div class=col>
+      <a href="sobre.html"> Sobre nós | Equipe</a>
+      <br>
+      <a href="privacidade.html">Política de privacidade</a>
+      <br>
+      <a href="termos.html"> Termos de uso</a>
+      <br>
+      <a href="contato.html"> Entre em contato conosco</a>
+      <br>
+    </div>
+
+    <div class=col>
+      <p>REDES SOCIAIS</p>
+      <div><i class="bi bi-facebook">Facebook: Dev´s Fly</i></div>
+      <div><i class="bi bi-instagram">Instagram: @devsflyregente</i></div>
+      <div><i class="bi bi-envelope-at">Email: devsfly@gmail.com</i></div>
+      <div></div>
+      <div></div>
+    </div>
+
+  </div>
+  <script>
+    let cartItems = [];
+       let total = 0;
+   
+       function addToCart(productName, productPrice) {
+         cartItems.push({ name: productName, price: productPrice });
+         total += productPrice;
+         updateCartUI();
+       }
+   
+       function updateCartUI() {
+         const cartItemsElement = document.getElementById('cart-items');
+         const totalElement = document.getElementById('total');
+         cartItemsElement.innerHTML = '';
+   
+         cartItems.forEach(item => {
+           const listItem = document.createElement('li');
+           listItem.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+           cartItemsElement.appendChild(listItem);
+         });
+   
+         totalElement.textContent = `Total: $${total.toFixed(2)}`;
+   
+         const cart = document.getElementById('cart');
+         cart.style.visibility = 'visible';
+         cart.style.opacity = '1';
+       }
+   
+       function toggleCartVisibility() {
+         const cart = document.getElementById('cart');
+         if (cart.style.visibility === 'visible') {
+           cart.style.visibility = 'hidden';
+           cart.style.opacity = '0';
+         } else {
+           cart.style.visibility = 'visible';
+           cart.style.opacity = '1';
+         }
+       }
+   </script>
+</footer>
+</body>
+
+</html>
